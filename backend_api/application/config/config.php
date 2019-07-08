@@ -34,7 +34,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/CI_HMVC_TemplateV2/';
+$config['base_url'] = 'http://localhost/orchester/backend_api/';
 
 /*
 |--------------------------------------------------------------------------
