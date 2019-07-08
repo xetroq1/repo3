@@ -11,7 +11,7 @@ export default {
     },
     {
       title: true,
-      name: 'Theme',
+      name: 'ADMIN',
       wrapper: {            // optional wrapper object
         element: '',        // required valid HTML5 element tag
         attributes: {}        // optional valid JS object with JS API naming ex: { className: "my-class", style: { fontFamily: "Verdana" }, id: "my-id"}
@@ -32,6 +32,15 @@ export default {
       name: 'Colors',
       url: '/theme/colors',
       icon: 'icon-drop',
+    },
+    {
+      title: true,
+      name: 'NAVIGATION',
+      wrapper: {            // optional wrapper object
+        element: '',        // required valid HTML5 element tag
+        attributes: {}        // optional valid JS object with JS API naming ex: { className: "my-class", style: { fontFamily: "Verdana" }, id: "my-id"}
+      },
+      class: ''             // optional class names space delimited list for title item ex: "text-center"
     },
     {
       name: 'Typography',
