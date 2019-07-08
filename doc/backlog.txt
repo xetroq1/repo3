@@ -1,0 +1,28 @@
+
+backlogs
+
+
+admin login view
+admin users
+sidebar with manage users, manage tast tabs
+manage user page
+activate/delete/deactivate user
+manage task page
+view logs page
+create/delete/update task
+view atc
+
+
+
+
+
+user login view
+login
+registration view
+registration process
+User Manage task page
+view task progress timeline
+view task page
+view task history
+update task status
+notification from new task
