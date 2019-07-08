@@ -13,9 +13,6 @@ create/delete/update task
 view atc
 
 
-
-
-
 user login view
 login
 registration view

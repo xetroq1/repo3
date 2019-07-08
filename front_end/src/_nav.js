@@ -24,6 +24,11 @@ export default {
       icon: 'icon-drop',
     },
     {
+    name: 'Users',
+    url: 'user/users',
+    icon: 'icon-user',    
+    },
+    {
       name: 'Colors',
       url: '/theme/colors',
       icon: 'icon-drop',
