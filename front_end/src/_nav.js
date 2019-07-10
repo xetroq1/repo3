@@ -25,7 +25,7 @@ export default {
     },
     {
       title: true,
-      name: 'NAVIGATION',
+      name: 'USER NAVIGATION',
       wrapper: {            // optional wrapper object
         element: '',        // required valid HTML5 element tag
         attributes: {}        // optional valid JS object with JS API naming ex: { className: "my-class", style: { fontFamily: "Verdana" }, id: "my-id"}
@@ -33,8 +33,18 @@ export default {
       class: ''             // optional class names space delimited list for title item ex: "text-center"
     },
     {
+      name: 'Manage Tasks',
+      url: '/theme/colors',
+      icon: 'icon-list',
+    },
+    {
+      name: 'Other Tab',
+      url: '/theme/colors',
+      icon: 'icon-bookmark',
+    },
+    {
       title: true,
-      name: 'NAVIGATION',
+      name: 'THEME',
       wrapper: {            // optional wrapper object
         element: '',        // required valid HTML5 element tag
         attributes: {}        // optional valid JS object with JS API naming ex: { className: "my-class", style: { fontFamily: "Verdana" }, id: "my-id"}
