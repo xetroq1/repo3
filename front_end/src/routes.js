@@ -80,6 +80,7 @@ const routes = [
   { path: '/users', exact: true,  name: 'Users', component: Users },
   { path: '/users/:id', exact: true, name: 'User Details', component: User },
 
+
   // Our changes
   { path: '/user/user', name: 'Users', component: User },
 
