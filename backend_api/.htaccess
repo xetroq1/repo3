@@ -4,4 +4,4 @@ RewriteBase /
 RewriteRule ^(application|system|\.svn) index.php/$1 [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ CI_HMVC_TemplateV2/index.php/$1 [QSA,L]
+RewriteRule ^(.*)$ orchester/backend_api/index.php/$1 [QSA,L]
