@@ -6,47 +6,28 @@ import  { Redirect, withRouter } from 'react-router-dom';
 class Login extends Component {
 constructor( props ){
     super( props );
-    this.state = {
-        loginProcess: "failed"
-    };
+    this.state={
+      username:'',
+      password:''
+    }
+
     this.handleChange = this.handleChange.bind(this);
     this.submitLogin = this.submitLogin.bind(this);
-    this.renderRedirect = this.renderRedirect.bind(this);
 }
 
 handleChange(event) {
     this.setState({[event.target.name]: event.target.value});
 }
 
-renderRedirect = (e) => {
-    // e.preventDefault();
-    // alert(this.state.loginProcess);
-    if (this.state.loginProcess=="success") {
-        return true;
-    }else{
-        return false;
-    }
+handleClick(event) {
+    event.preventDefault()
+    alert();
+    console.log(event.target);
 }
 
-submitLogin(e){
-    e.preventDefault();
-    console.log(this.state);
-    if (true) {
-        alert(1);
-        this.setState({loginProcess: "success"});
-        // history.replace("/dashboard")
-        // return <Redirect to='/dashboard'  />
-        alert(2);
-    }else{
-        alert(3);
-    }
-    // alert();
-}
+
 
 render() {
-    if (this.renderRedirect()) {
-      return <Redirect to='/dashboard' />
-    }
     return (
       <div className="app flex-row align-items-center">
         <Container>
@@ -64,7 +45,7 @@ render() {
                             <i className="icon-user"></i>
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input type="text" name="username" placeholder="Username" autoComplete="username" onChange={this.handleChange} />
+                        <Input type="text" name="username" placeholder="Username" autoComplete="username" onChange={this.handleChange} onChange = {(event,newValue) => this.setState({username:newValue})} />
                       </InputGroup>
                       <InputGroup className="mb-4">
                         <InputGroupAddon addonType="prepend">
@@ -76,7 +57,7 @@ render() {
                       </InputGroup>
                       <Row>
                         <Col xs="6">
-                          <Button type="submit" color="primary" className="px-4">Login</Button>
+                          <Button type="submit" color="primary" className="px-4" onClick={(event) => this.handleClick(event)}>Login</Button>
                         </Col>
                         <Col xs="6" className="text-right">
                           {
