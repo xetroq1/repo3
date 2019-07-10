@@ -24,14 +24,14 @@ export default {
       icon: 'icon-drop',
     },
     {
-    name: 'Users',
-    url: 'user/users',
-    icon: 'icon-user',    
+    name: 'Login',
+    url: '/login',
+    icon: 'icon-star',
     },
     {
-      name: 'Colors',
-      url: '/theme/colors',
-      icon: 'icon-drop',
+    name: 'Users',
+    url: '/user',
+    icon: 'icon-user',
     },
     {
       title: true,
