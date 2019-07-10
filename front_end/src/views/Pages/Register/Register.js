@@ -1,7 +1,35 @@
 import React, { Component } from 'react';
 import { Button, Card, CardBody, CardFooter, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
+import  { Redirect } from 'react-router-dom';
 
 class Register extends Component {
+constructor( props ){
+    super( props );
+    this.state = {};
+    this.handleChange = this.handleChange.bind(this);
+    this.submitLogin = this.submitLogin.bind(this);
+}
+
+handleChange(event) {
+    this.setState({[event.target.name]: event.target.value});
+}
+
+submitLogin(e){
+    e.preventDefault();
+    console.log(this.state);
+
+
+    if (true) {
+        alert(1);
+        return <Redirect to='/dashboard'  />
+            alert(2);
+    }else{
+        alert(3);
+
+    }
+// alert();
+}
+
   render() {
     return (
       <div className="app flex-row align-items-center">
@@ -10,7 +38,7 @@ class Register extends Component {
             <Col md="9" lg="7" xl="6">
               <Card className="mx-4">
                 <CardBody className="p-4">
-                  <Form>
+                  <Form onSubmit={this.submitLogin}>
                     <h1>Register</h1>
                     <p className="text-muted">Create your account</p>
                     <InputGroup className="mb-3">

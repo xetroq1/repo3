@@ -33,9 +33,14 @@ export default {
       class: ''             // optional class names space delimited list for title item ex: "text-center"
     },
     {
-      name: 'Manage Tasks',
-      url: '/theme/colors',
-      icon: 'icon-list',
+    name: 'Login',
+    url: '/login',
+    icon: 'icon-star',
+    },
+    {
+    name: 'Users',
+    url: '/user',
+    icon: 'icon-user',
     },
     {
       name: 'Other Tab',
