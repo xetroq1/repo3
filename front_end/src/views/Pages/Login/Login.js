@@ -20,7 +20,7 @@ handleChange(event) {
 }
 
 handleClick(event){
-    const getUser_url='http://http://localhost/orchester/backend_api/login/login';
+    const getUser_url='http://http://localhost/orchester/backend_api/login/login/'.'';
     fetch(getUser_url).then(res => res.json()).then(
         (result) => {
             this.setState({

@@ -32,6 +32,7 @@ class Login extends MX_Controller {
 
 	public function login(){
         
+        $this->My_Model->getRows();
 	}
 
 }
