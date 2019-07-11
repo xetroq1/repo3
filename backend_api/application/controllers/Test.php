@@ -1,11 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Home extends CI_Controller {
+class Test extends MX_Controller {
 
 	public function index(){
-		echo "test check";
-		// $this->load->view('welcome_message');
+		echo "test checkss";
 	}
 
 
