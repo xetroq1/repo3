@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 import  { Redirect, withRouter } from 'react-router-dom';
+import axios from 'axios';
 
 class Login extends Component {
 constructor( props ){
@@ -12,20 +13,25 @@ constructor( props ){
     }
 
     this.handleChange = this.handleChange.bind(this);
-    this.submitLogin = this.submitLogin.bind(this);
 }
 
 handleChange(event) {
     this.setState({[event.target.name]: event.target.value});
 }
 
-handleClick(event) {
-    event.preventDefault()
-    alert();
-    console.log(event.target);
-}
-
-
+handleClick(event){
+    const getUser_url='http://localhost/premierAccounting/User/get_users/1';
+    fetch(getUser_url).then(res => res.json()).then(
+        (result) => {
+            this.setState({
+                users: result
+            });
+        },
+        (error) => {
+            this.setState({ error });
+        }
+             )
+ }
 
 render() {
     return (
@@ -45,7 +51,7 @@ render() {
                             <i className="icon-user"></i>
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input type="text" name="username" placeholder="Username" autoComplete="username" onChange={this.handleChange} onChange = {(event,newValue) => this.setState({username:newValue})} />
+                        <Input type="text" name="username" placeholder="Username" autoComplete="username" onChange={this.handleChange} />
                       </InputGroup>
                       <InputGroup className="mb-4">
                         <InputGroupAddon addonType="prepend">
