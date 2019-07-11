@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 10, 2019 at 02:26 AM
--- Server version: 10.1.31-MariaDB
--- PHP Version: 5.6.34
+-- Generation Time: Jul 11, 2019 at 02:15 AM
+-- Server version: 10.1.16-MariaDB
+-- PHP Version: 5.6.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -25,14 +23,40 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tasks`
+--
+
+CREATE TABLE `tasks` (
+  `task_id` int(11) NOT NULL,
+  `task_title` varchar(255) DEFAULT NULL,
+  `task_description` varchar(255) DEFAULT NULL,
+  `task_assigned_to` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `task_status`
+--
+
+CREATE TABLE `task_status` (
+  `task_status_id` int(11) NOT NULL,
+  `fk_task_id` int(11) DEFAULT NULL,
+  `task_status` varchar(255) DEFAULT NULL,
+  `task_time_updated` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `username` varchar(100) NOT NULL,
-  `password` varchar(1000) NOT NULL,
-  `user_type` varchar(100) NOT NULL
+  `username` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `user_type` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -40,7 +64,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `user_type`) VALUES
-(1, 'user', 'password', '1');
+(1, 'admin', 'admin', 'admin'),
+(2, 'john123', 'john123', 'user');
 
 -- --------------------------------------------------------
 
@@ -49,19 +74,31 @@ INSERT INTO `users` (`id`, `username`, `password`, `user_type`) VALUES
 --
 
 CREATE TABLE `users_details` (
-  `users_details_id` int(11) NOT NULL,
-  `fk_user_id` int(100) NOT NULL,
-  `full_name` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `gender` varchar(100) NOT NULL,
-  `date_of_birth` varchar(100) NOT NULL,
-  `date_created` varchar(100) NOT NULL,
-  `country_code` varchar(100) NOT NULL
+  `users_detail_id` int(11) NOT NULL,
+  `fk_user_id` int(11) DEFAULT NULL,
+  `full_name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `gender` varchar(255) DEFAULT NULL,
+  `date_of_birth` varchar(255) DEFAULT NULL,
+  `created_at` varchar(255) DEFAULT NULL,
+  `country_code` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `tasks`
+--
+ALTER TABLE `tasks`
+  ADD PRIMARY KEY (`task_id`);
+
+--
+-- Indexes for table `task_status`
+--
+ALTER TABLE `task_status`
+  ADD PRIMARY KEY (`task_status_id`);
 
 --
 -- Indexes for table `users`
@@ -73,25 +110,34 @@ ALTER TABLE `users`
 -- Indexes for table `users_details`
 --
 ALTER TABLE `users_details`
-  ADD PRIMARY KEY (`users_details_id`);
+  ADD PRIMARY KEY (`users_detail_id`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD KEY `fk_user_id` (`fk_user_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
+-- AUTO_INCREMENT for table `tasks`
+--
+ALTER TABLE `tasks`
+  MODIFY `task_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `task_status`
+--
+ALTER TABLE `task_status`
+  MODIFY `task_status_id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `users_details`
 --
 ALTER TABLE `users_details`
-  MODIFY `users_details_id` int(11) NOT NULL AUTO_INCREMENT;
-COMMIT;
-
+  MODIFY `users_detail_id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

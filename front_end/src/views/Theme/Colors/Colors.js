@@ -22,7 +22,6 @@ class ThemeView extends Component {
   }
 
   render() {
-
     return (
       <table className="w-100">
         <tbody>
