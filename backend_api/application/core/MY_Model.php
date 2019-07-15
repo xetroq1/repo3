@@ -5,6 +5,7 @@ class MY_Model extends CI_Model {
 
      public function __construct(){
           parent::__construct();
+          echo "adsadddddddd";
      }
 
      public function getRows($table ,$select, $where = array() , $join = array() ,$group = "", $res = 'array' ){
@@ -188,9 +189,6 @@ class MY_Model extends CI_Model {
      $this->db->limit($item, $value);
      return $this;
     }
-
-
-
 
     public function row()
     {

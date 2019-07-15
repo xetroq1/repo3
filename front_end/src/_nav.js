@@ -39,7 +39,7 @@ export default {
     },
     {
     name: 'Users',
-    url: '/theme/users',
+    url: '/users',
     icon: 'icon-user',
     },
     {

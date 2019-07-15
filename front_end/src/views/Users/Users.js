@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Badge, Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
+import axios from 'axios';
 
-import usersData from './UsersData'
+import usersData from './UsersData';
 
 function UserRow(props) {
   const user = props.user
@@ -29,6 +30,26 @@ function UserRow(props) {
 
 class Users extends Component {
 
+  componentDidMount() {
+    axios
+      .get("https://randomuser.me/api/?results=5")
+      .then(response =>
+        response.data.results.map(user => ({
+          name: `${user.name.first} ${user.name.last}`,
+          username: `${user.login.username}`,
+          email: `${user.email}`,
+          image: `${user.picture.thumbnail}`
+        }))
+      )
+      .then(users => {
+        this.setState({
+          users,
+          isLoading: false
+        });
+      })
+      .catch(error => this.setState({ error, isLoading: false }));
+  }
+
   render() {
 
     const userList = usersData.filter((user) => user.id < 10)
@@ -42,6 +63,9 @@ class Users extends Component {
                 <i className="fa fa-align-justify"></i> Users <small className="text-muted">example</small>
               </CardHeader>
               <CardBody>
+                <h1>
+                sadasdsa
+                </h1>
                 <Table responsive hover>
                   <thead>
                     <tr>
