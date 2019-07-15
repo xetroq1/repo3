@@ -42,6 +42,9 @@ class Users extends Component {
                 <i className="fa fa-align-justify"></i> Users <small className="text-muted">example</small>
               </CardHeader>
               <CardBody>
+                <h1>
+                sadasdsa
+                </h1>
                 <Table responsive hover>
                   <thead>
                     <tr>
