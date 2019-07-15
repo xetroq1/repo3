@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
-import  { Redirect, withRouter } from 'react-router-dom';
+import  { Redirect, withRouter, Route } from 'react-router-dom';
 import axios from 'axios';
 
 class Login extends Component {
@@ -10,9 +10,11 @@ constructor( props ){
     this.state={
       username:'',
       password:'',
+      redirect: false,
     }
 
     this.handleChange = this.handleChange.bind(this);
+    this.onformSubmit = this.onformSubmit.bind(this);
 }
 
 handleChange(event) {
@@ -30,7 +32,7 @@ handleSubmit (event){
    // this.setState(this.state);
 };
 
-onformSubmit(data){
+onformSubmit = (data) => {
     this.setState(this.state);
     var self            = this;
     const insert_url    = 'http://localhost/orchester/backend_api/login/login';
@@ -46,10 +48,10 @@ onformSubmit(data){
         })
             .then(function (result) {
                 console.log(result.data);
-
+                this.setState({redirect: !this.state.redirect});
         })
             .catch(function (result) {
-                console.log(result.data);
+                console.log(result);
         });
 }
 
@@ -57,6 +59,9 @@ onformSubmit(data){
 
 
 render() {
+    if (this.state.redirect) {
+    return <Redirect to="/dashboard" />;
+  }
     return (
       <div className="app flex-row align-items-center">
         <Container>
