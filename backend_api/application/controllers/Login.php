@@ -5,6 +5,8 @@ class Login extends MX_Controller {
 
     public function __construct(){
         parent::__construct();
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Request-Headers: GET,POST,OPTIONS,DELETE,PUT");
     }
 
 	public function index(){
@@ -31,8 +33,40 @@ class Login extends MX_Controller {
 	}
 
 	public function login(){
-        
-        $this->My_Model->getRows();
+        $user = array(
+            'username'  => $this->input->post('username'),
+            'password'   => $this->input->post('password'),
+        );
+        $users = array(
+            'username'  => 'user',
+            'password'   => 'password',
+        );
+
+        $query = $this->MY_Model->select()
+        ->from('users')
+        ->where($user)
+        ->num_rows();
+
+        $query1 = $this->MY_Model->select()
+        ->from('users')
+        ->where($user)
+        ->result();
+
+        if ($query > 0){
+            $response = array(
+           'response_status' => true,
+           'message' => 'Login successfully',
+           'return'  => $query1
+            );
+        }else{
+            $response = array(
+           'response_status' => false,
+           'message' => 'Error Credentials',
+           'return'  => 'Error'
+            );
+        }
+
+        echo json_encode($response);
 	}
 
 }

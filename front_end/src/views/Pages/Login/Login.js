@@ -9,7 +9,7 @@ constructor( props ){
     super( props );
     this.state={
       username:'',
-      password:''
+      password:'',
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -19,19 +19,42 @@ handleChange(event) {
     this.setState({[event.target.name]: event.target.value});
 }
 
-handleClick(event){
-    const getUser_url='http://http://localhost/orchester/backend_api/login/login/'.'';
-    fetch(getUser_url).then(res => res.json()).then(
-        (result) => {
-            this.setState({
-                users: result
-            });
-        },
-        (error) => {
-            this.setState({ error });
-        }
-             )
- }
+handleSubmit (event){
+
+    const input_fields   =  {
+        username   :   this.state.username,
+        password  :   this.state.password,
+    };
+    event.preventDefault();
+    this.onformSubmit(input_fields)
+   // this.setState(this.state);
+};
+
+onformSubmit(data){
+    this.setState(this.state);
+    var self            = this;
+    const insert_url    = 'http://localhost/orchester/backend_api/login/login';
+    const bodyFormData  =  new FormData();
+    for(var i  = 0; i  < Object.keys(data).length; i++){
+        bodyFormData.append(Object.keys(data)[i],this.state[Object.keys(data)[i]]);
+    }
+    axios({
+            method : 'post',
+            url    :  insert_url,
+            data   : bodyFormData,
+            config : { headers: {'Content-Type': 'multipart/form-data' }}
+        })
+            .then(function (result) {
+                console.log(result.data);
+
+        })
+            .catch(function (result) {
+                console.log(result.data);
+        });
+}
+
+
+
 
 render() {
     return (
@@ -42,7 +65,7 @@ render() {
               <CardGroup>
                 <Card className="p-4">
                   <CardBody>
-                    <Form onSubmit={this.renderRedirect}>
+                    <Form onSubmit={(e) => this.handleSubmit(e)}>
                       <h1>Login</h1>
                       <p className="text-muted">Sign In to your account</p>
                       <InputGroup className="mb-3">
@@ -51,7 +74,7 @@ render() {
                             <i className="icon-user"></i>
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input type="text" name="username" placeholder="Username" autoComplete="username" onChange={this.handleChange} />
+                        <Input type="text" name="username" placeholder="Username" autoComplete="username" value={this.state.username} onChange={this.handleChange} />
                       </InputGroup>
                       <InputGroup className="mb-4">
                         <InputGroupAddon addonType="prepend">
@@ -59,11 +82,11 @@ render() {
                             <i className="icon-lock"></i>
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input type="password" name="password" onChange={this.handleChange} placeholder="Password" autoComplete="current-password" />
+                        <Input type="password" name="password" value={this.state.password} onChange={this.handleChange} placeholder="Password" autoComplete="current-password" />
                       </InputGroup>
                       <Row>
                         <Col xs="6">
-                          <Button type="submit" color="primary" className="px-4" onClick={(event) => this.handleClick(event)}>Login</Button>
+                          <Button color="primary" className="px-4">Login</Button>
                         </Col>
                         <Col xs="6" className="text-right">
                           {
