@@ -3,11 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Login extends MX_Controller {
 
-    public function __construct(){
-        parent::__construct();
-        header("Access-Control-Allow-Origin: *");
-        header("Access-Control-Request-Headers: GET,POST,OPTIONS,DELETE,PUT");
-    }
+  public function __construct(){
+      parent::__construct();
+      header("Access-Control-Allow-Origin: *");
+      header("Access-Control-Request-Headers: GET,POST,OPTIONS,DELETE,PUT");
+  }
 
 	public function index(){
         echo 'test';
