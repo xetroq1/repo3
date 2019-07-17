@@ -5,6 +5,10 @@ class MY_Model extends CI_Model {
 
      public function __construct(){
           parent::__construct();
+<<<<<<< HEAD
+=======
+          // echo "Hi From Model<br>";
+>>>>>>> b2874bd60557222a8f949a079492f98a62837955
      }
 
      public function getRows($table ,$select, $where = array() , $join = array() ,$group = "", $res = 'array' ){
@@ -99,7 +103,7 @@ class MY_Model extends CI_Model {
        return $this->db->insert_id();
     }
     public function num_rows(){
-       return $this->get()->num_rows();
+       return $this->db->get()->num_rows();
     }
     public function count_all_results(){
        return $this->db->count_all_results();
@@ -152,8 +156,7 @@ class MY_Model extends CI_Model {
       if ($table=='') {
        return $this->db->get();
       }else{
-       $this->db->get($table);
-       return $this;
+       return $this->db->get($table);
       }
     }
     public function group_start()
@@ -188,7 +191,6 @@ class MY_Model extends CI_Model {
      $this->db->limit($item, $value);
      return $this;
     }
-
     public function row()
     {
      return $this->db->get()->row();

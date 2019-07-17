@@ -17,7 +17,7 @@ class Users extends MY_Controller{
   public function get_users()
   {
 
-    $result=$this->MY_Model()
+    $result=$this->MY_Model
     ->select()
     ->from('users')
     ->result_array();
