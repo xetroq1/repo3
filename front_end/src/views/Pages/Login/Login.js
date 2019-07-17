@@ -11,10 +11,12 @@ constructor( props ){
       username:'',
       password:'',
       redirect: false,
+      data    : [],
     }
 
     this.handleChange = this.handleChange.bind(this);
     this.onformSubmit = this.onformSubmit.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
 }
 
 handleChange(event) {
@@ -46,11 +48,12 @@ onformSubmit = (data) => {
             data   : bodyFormData,
             config : { headers: {'Content-Type': 'multipart/form-data' }}
         })
-            .then(function (result) {
-                console.log(result.data);
-                this.setState({redirect: !this.state.redirect});
-        })
-            .catch(function (result) {
+        .then(
+            (result) => {
+                this.setState({redirect: !this.state.redirect, data : result.data})
+            }
+        )
+        .catch(function (result) {
                 console.log(result);
         });
 }
@@ -59,8 +62,11 @@ onformSubmit = (data) => {
 
 
 render() {
+    const data   =  {
+        data   :   this.state.data,
+    };
     if (this.state.redirect) {
-    return <Redirect to="/dashboard" />;
+    return <Redirect to="/dashboard" data={data}/>;
   }
     return (
       <div className="app flex-row align-items-center">

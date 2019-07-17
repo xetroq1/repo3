@@ -57,7 +57,7 @@ class Login extends MX_Controller {
            'response_status' => true,
            'message' => 'Login successfully',
            'return'  => $query1
-            );
+       );
         }else{
             $response = array(
            'response_status' => false,
