@@ -58,9 +58,6 @@ onformSubmit = (data) => {
         });
 }
 
-
-
-
 render() {
     const data   =  {
         data   :   this.state.data,
