@@ -30,7 +30,14 @@ class DefaultLayout extends Component {
 
   signOut(e) {
     e.preventDefault()
+    this.removeUser('user_id', 'usertype','username')
     this.props.history.push('/login')
+  }
+
+  removeUser(id,uname,utype){
+      localStorage.removeItem(id)
+      localStorage.removeItem(uname)
+      localStorage.removeItem(utype)
   }
 
   render() {

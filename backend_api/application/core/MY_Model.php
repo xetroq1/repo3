@@ -5,10 +5,6 @@ class MY_Model extends CI_Model {
 
      public function __construct(){
           parent::__construct();
-<<<<<<< HEAD
-=======
-          // echo "Hi From Model<br>";
->>>>>>> b2874bd60557222a8f949a079492f98a62837955
      }
 
      public function getRows($table ,$select, $where = array() , $join = array() ,$group = "", $res = 'array' ){
