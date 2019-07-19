@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
+import { Alert, Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 import  { Redirect, withRouter, Route } from 'react-router-dom';
 import axios from 'axios';
 
@@ -9,19 +9,39 @@ constructor( props ){
     super( props );
     this.state={
       username:'',
+      visible : true,
       password:'',
       redirect: false,
       data    : [],
+      response:[],
     }
 
     this.handleChange = this.handleChange.bind(this);
     this.onformSubmit = this.onformSubmit.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.onDismiss = this.onDismiss.bind(this);
+}
+
+ setStorage(){
+    this.state.data.map(
+        (key) =>
+        this.setUser(key.id,key.username,key.user_type)
+    );
+}
+
+setUser(id,uname,utype){
+    localStorage.setItem('user_id',id)
+    localStorage.setItem('username',uname)
+    localStorage.setItem('usertype',utype)
 }
 
 handleChange(event) {
     this.setState({[event.target.name]: event.target.value});
 }
+
+onDismiss(){
+    this.setState({visible:false, response : {response_status: ''}});
+  }
 
 handleSubmit (event){
 
@@ -31,7 +51,7 @@ handleSubmit (event){
     };
     event.preventDefault();
     this.onformSubmit(input_fields)
-   // this.setState(this.state);
+   this.setState(this.state);
 };
 
 onformSubmit = (data) => {
@@ -49,12 +69,19 @@ onformSubmit = (data) => {
             config : { headers: {'Content-Type': 'multipart/form-data' }}
         })
         .then(
-            (result) => {
-                this.setState({redirect: !this.state.redirect, data : result.data})
+            (result) =>
+            {
+                this.setState({data : result.data.return, response : result.data})
+                console.log(this.state.data);
+                console.log(this.state.response);
+                if(result.data.response_status){
+                    this.setStorage()
+                    window.location.reload();
+                }
             }
         )
-        .catch(function (result) {
-                console.log(result);
+        .catch(function (result){
+            console.log(result);
         });
 }
 
@@ -62,14 +89,15 @@ render() {
     const data   =  {
         data   :   this.state.data,
     };
-    if (this.state.redirect) {
-    return <Redirect to="/dashboard" data={data}/>;
-  }
+    if("user_id" in localStorage){
+       return <Redirect to="/dashboard" data={data}/>;
+    }
     return (
       <div className="app flex-row align-items-center">
         <Container>
           <Row className="justify-content-center">
             <Col md="8">
+            {this.state.response.response_status === false && <Col xs="12"><Alert className="col-md-12" color="danger"  toggle={this.onDismiss}> {this.state.response.message}</Alert></Col>}
               <CardGroup>
                 <Card className="p-4">
                   <CardBody>
