@@ -72,8 +72,6 @@ onformSubmit = (data) => {
             (result) =>
             {
                 this.setState({data : result.data.return, response : result.data})
-                console.log(this.state.data);
-                console.log(this.state.response);
                 if(result.data.response_status){
                     this.setStorage()
                     window.location.reload();
