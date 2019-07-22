@@ -5,6 +5,7 @@ class MY_Model extends CI_Model {
 
      public function __construct(){
           parent::__construct();
+          // echo "Hi From Model<br>";
      }
 
      public function getRows($table ,$select, $where = array() , $join = array() ,$group = "", $res = 'array' ){

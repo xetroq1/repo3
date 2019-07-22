@@ -32,27 +32,20 @@ class Users extends Component {
 
   componentDidMount() {
     axios
-      .get("https://randomuser.me/api/?results=5")
-      .then(response =>
-        response.data.results.map(user => ({
-          name: `${user.name.first} ${user.name.last}`,
-          username: `${user.login.username}`,
-          email: `${user.email}`,
-          image: `${user.picture.thumbnail}`
-        }))
-      )
-      .then(users => {
-        this.setState({
-          users,
-          isLoading: false
-        });
-      })
-      .catch(error => this.setState({ error, isLoading: false }));
+      .get("http://localhost/orchester/backend_api/common/get_users")
+      .then(result  => {
+        this.setState({ users : result.data });
+        // alert(1);
+        console.log(usersData);
+        console.log(result.data);
+        // usersData = result.data;
+      });
+      // .catch(error => this.setState({ error, isLoading: false }));
   }
 
   render() {
-
-    const userList = usersData.filter((user) => user.id < 10)
+    console.log(this.state.users);
+    const userList = users.filter((user) => user.id < 10)
 
     return (
       <div className="animated fadeIn">
