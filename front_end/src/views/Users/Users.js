@@ -20,15 +20,21 @@ function UserRow(props) {
   return (
     <tr key={user.id.toString()}>
       <th scope="row"><Link to={userLink}>{user.id}</Link></th>
-      <td><Link to={userLink}>{user.name}</Link></td>
-      <td>{user.registered}</td>
-      <td>{user.role}</td>
-      <td><Link to={userLink}><Badge color={getBadge(user.status)}>{user.status}</Badge></Link></td>
+      <td><Link to={userLink}>{user.username}</Link></td>
+      {// <td>{user.registered}</td>
+    }
+      <td>{user.user_type}</td>
+      {// <td><Link to={userLink}><Badge color={getBadge(user.status)}>{user.status}</Badge></Link></td>
+    }
     </tr>
   )
 }
 
 class Users extends Component {
+  constructor(props){
+    super(props);
+    this.state = { users: [] };
+  }
 
   componentDidMount() {
     axios
@@ -37,15 +43,29 @@ class Users extends Component {
         this.setState({ users : result.data });
         // alert(1);
         console.log(usersData);
-        console.log(result.data);
+        // console.log(result.data);
+        // console.log(this.state.users);
+        // this.setState({users: result.data});
         // usersData = result.data;
+      })
+      .catch(error => {
+        alert("connection error");
+        // console.log('herrorr');
+        this.setState({ error, isLoading: false })
       });
-      // .catch(error => this.setState({ error, isLoading: false }));
   }
 
   render() {
-    console.log(this.state.users);
-    const userList = users.filter((user) => user.id < 10)
+    // console.log('asdasd')
+    const { users } = this.state;
+    let userList = [];
+    if (this.state.users) {
+      userList = users.filter((user) => user.id < 10)
+    }else{
+      userList = usersData.filter((user) => user.id < 10)
+    }
+
+    console.log(userList);
 
     return (
       <div className="animated fadeIn">
@@ -63,10 +83,12 @@ class Users extends Component {
                   <thead>
                     <tr>
                       <th scope="col">id</th>
-                      <th scope="col">name</th>
-                      <th scope="col">registered</th>
-                      <th scope="col">role</th>
-                      <th scope="col">status</th>
+                      <th scope="col">username</th>
+                      {// <th scope="col">registered</th>
+                    }
+                      <th scope="col">user_type</th>
+                      {// <th scope="col">status</th>
+                    }
                     </tr>
                   </thead>
                   <tbody>

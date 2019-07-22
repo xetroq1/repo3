@@ -32,11 +32,10 @@ class Common extends MY_Controller{
     ->where($id_field,$id)->get();
 
     if ($result->num_rows()) {
-      echo "1";
+      echo ($result->num_rows())?json_encode($result->row()):false;
     }else{
-      echo "2";
+      echo "false";
     }
 
-    echo ($result->num_rows())?json_encode($result->row()):false;
   }
 }
