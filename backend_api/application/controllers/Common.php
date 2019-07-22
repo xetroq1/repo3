@@ -7,6 +7,8 @@ class Common extends MY_Controller{
   public function __construct()
   {
     parent::__construct();
+    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Request-Headers: GET,POST,OPTIONS,DELETE,PUT");
   }
 
   public function index()
@@ -18,11 +20,8 @@ class Common extends MY_Controller{
     $result=$this->MY_Model
     ->select()
     ->from('users')
-    ->result_array();
-    echo "<pre>";
-    print_r($result->result_array);
-    echo "</pre>";
-    exit();
+    ->get();
+    echo ($result->num_rows())?json_encode($result->result()):false;
   }
 
   public function get_row($table='users',$id_field='id',$id='5')
