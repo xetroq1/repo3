@@ -69,28 +69,6 @@ class Login extends MX_Controller {
         echo json_encode($response);
 	}
 
-    public function register(){
-        $this->validate_fields();
-        $this->check_valid_email();
-        $this->check_user();
 
-        $userData      =  array(
-            'course_name' => $this->input->post('Coursename'),
-            'description' => $this->input->post('Coursedesc'),
-            'date_added' => date('Y-m-d'),
-            'date_modified' => '',
-            'added_by' => 'Dummy',
-            'course_status'   => 1,
-        );
-
-        $id = $this->MY_Model->insert('tbl_course',$userData);
-             $response = array(
-            'response_status' => true,
-            'message' => 'User added successfully',
-            'return'  => ''
-             );
-
-        echo json_encode($response);
-    }
 
 }
