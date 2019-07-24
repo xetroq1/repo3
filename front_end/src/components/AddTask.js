@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import {
   Badge,
   Button,
@@ -32,7 +33,7 @@ class AddTask extends Component {
     // this.toggle = this.toggle.bind(this);
     // this.toggleFade = this.toggleFade.bind(this);
     this.state = {
-      formData: []
+      formData: {}
     };
     this.updateState = this.updateState.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -52,16 +53,41 @@ class AddTask extends Component {
     event.preventDefault();
   }
 
-
   updateState(e) {
-    console.log(e.target);
-   this.setState({
-     formData:{
-       e.target.name: e.target.value
-     }
-    });
-      console.log(this.state);
+    // console.log(e.target);
+   // this.setState({
+   //   formData:{
+   //     [e.target.name]: e.target.value
+   //   }
+   //  });
+   this.state.formData[e.target.name] = e.target.value;
+  // this.setState({
+  //   formData:{
+  //     [e.target.name]: e.target.value
+  //   }
+  //  });
+      // console.log(this.state);
   }
+
+  submitTast = () => {
+    axios
+      .get("http://localhost/orchester/backend_api/common/get_users")
+      .then(result  => {
+        this.setState({ users : result.data });
+        // alert(1);
+        console.log(usersData);
+        // console.log(result.data);
+        // console.log(this.state.users);
+        // this.setState({users: result.data});
+        // usersData = result.data;
+      })
+      .catch(error => {
+        alert("connection error");
+        // console.log('herrorr');
+        this.setState({ error, isLoading: false })
+      });
+  }
+
 
   render() {
     // const { handleSubmit, pristine, reset, submitting } = props
@@ -79,11 +105,11 @@ class AddTask extends Component {
                 <form onSubmit={this.handleSubmit}>
                   <FormGroup>
                     <Label htmlFor="company">Title</Label>
-                    <Input type="text" name="title" placeholder="Enter your company name" onChange = {this.updateState} />
+                    <Input type="text" name="title" placeholder="Enter your company name" onChange = {this.updateState} value = { this.state.title }/>
                   </FormGroup>
                   <FormGroup>
                     <Label htmlFor="street">Description</Label>
-                    <Input type="text" name="description" placeholder="Enter street name" onChange = {this.updateState} />
+                    <Input type="text" name="description" placeholder="Enter street name" onChange = {this.updateState} value = { this.state.description }/>
                   </FormGroup>
                   <div className="form-actions">
                     <Button type="submit" color="primary">Submit</Button>
