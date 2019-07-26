@@ -6,47 +6,49 @@ import axios from 'axios';
 import usersData from './UsersData';
 
 function UserRow(props) {
-  const user = props.user
-  const userLink = `/users/${user.id}`
-  const addTask = `/task/add/${user.id}`
+  const task = props.task
+  const userLink = `/users/${task.task_id}`
+  const addTask = `/task/add/${task.task_id}`
 
-  const getBadge = (status) => {
-    return status === 'Active' ? 'success' :
-      status === 'Inactive' ? 'secondary' :
-        status === 'Pending' ? 'warning' :
-          status === 'Banned' ? 'danger' :
-            'primary'
-  }
+  // const getBadge = (status) => {
+  //   return status === 'Active' ? 'success' :
+  //     status === 'Inactive' ? 'secondary' :
+  //       status === 'Pending' ? 'warning' :
+  //         status === 'Banned' ? 'danger' :
+  //           'primary'
+  // }
 
   return (
-    <tr key={user.id.toString()}>
-      <th scope="row"><Link to={userLink}></Link></th>
-      <td><Link to={userLink}>{user.username}</Link></td>
+    <tr key={task.task_id.toString()}>
+      <th scope="row">{task.title}</th>
+      <td>{task.description}</td>
       {// <td>{user.registered}</td>
       }
-      <td>{user.user_type}</td>
+      <td><Link to={userLink}>View User :{task.assigned_to}</Link></td>
       {// <td><Link to={userLink}><Badge color={getBadge(user.status)}>{user.status}</Badge></Link></td>
       }
       <td>
-        <Link to={addTask}>Add Task</Link>
+        Actions
+        {// <Link to={addTask}>Add Task</Link>
+      }
       </td>
     </tr>
   )
 }
 
-class Users extends Component {
+class Tasks extends Component {
   constructor(props){
     super(props);
-    this.state = { users: [] };
+    this.state = { tasks: [] };
   }
 
   componentDidMount() {
     axios
-      .get("http://localhost/orchester/backend_api/common/get_users")
+      .get("http://localhost/orchester/backend_api/common/get_data/tasks")
       .then(result  => {
-        this.setState({ users : result.data });
+        this.setState({ tasks : result.data });
         // alert(1);
-        console.log(usersData);
+        // console.log(result);
         // console.log(result.data);
         // console.log(this.state.users);
         // this.setState({users: result.data});
@@ -62,12 +64,12 @@ class Users extends Component {
 
   render() {
     // console.log('asdasd')
-    const { users } = this.state;
+    const { tasks } = this.state;
     let userList = [];
-    if (this.state.users) {
-      userList = users.filter((user) => user.id < 10)
+    if (this.state.tasks) {
+      userList = tasks.filter((task) => task.task_id < 10)
     }else{
-      userList = usersData.filter((user) => user.id < 10)
+      userList = usersData.filter((task) => task.task_id < 10)
     }
 
     console.log(userList);
@@ -87,19 +89,19 @@ class Users extends Component {
                 <Table responsive hover>
                   <thead>
                     <tr>
-                      <th scope="col">id</th>
-                      <th scope="col">username</th>
+                      <th scope="col">Task Title</th>
                       {// <th scope="col">registered</th>
                     }
-                      <th scope="col">user_type</th>
+                      <th scope="col">Description</th>
+                      <th scope="col">ID of Assigned</th>
                       {// <th scope="col">status</th>
                     }
                       <th scope="col">action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {userList.map((user, index) =>
-                      <UserRow key={index} user={user}/>
+                    {userList.map((task, index) =>
+                      <UserRow key={index} task={task}/>
                     )}
                   </tbody>
                 </Table>
@@ -112,4 +114,4 @@ class Users extends Component {
   }
 }
 
-export default Users;
+export default Tasks;

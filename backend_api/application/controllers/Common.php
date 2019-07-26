@@ -62,4 +62,15 @@ class Common extends MY_Controller{
       //   echo "false";
       // }
   }
+
+  public function get_data($table="users")
+  {
+    $result=$this->MY_Model
+    ->select()
+    ->from($table)
+    ->get();
+    
+    echo ($result->num_rows())?json_encode($result->result()):false;
+  }
+
 }

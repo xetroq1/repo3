@@ -79,6 +79,7 @@ class AddTask extends Component {
     for(var i  = 0; i  < Object.keys(param).length; i++){
         bodyFormData.append(Object.keys(param)[i],param[Object.keys(param)[i]]);
     }
+    bodyFormData.append('assigned_to', `${this.props.match.params.toId}`);
       console.log(bodyFormData);
 
     axios({

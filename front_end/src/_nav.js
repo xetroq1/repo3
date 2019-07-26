@@ -38,6 +38,11 @@ export default {
     icon: 'icon-user',
     },
     {
+    name: 'Tasks',
+    url: '/tasks',
+    icon: '',
+    },
+    {
       name: 'Other Tab',
       url: '/theme/colors',
       icon: 'icon-bookmark',
