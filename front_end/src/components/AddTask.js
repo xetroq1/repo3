@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import  { Redirect } from 'react-router-dom';
 import {
   Badge,
   Button,
@@ -91,7 +92,9 @@ class AddTask extends Component {
       .then(
           (result) =>
           {
-            console.log(result);
+
+               return <Redirect to="/dashboard"/>;
+            // console.log(result);
               // this.setState({data : result.data.return, response : result.data})
               // if(result.data.response_status){
                   // this.setStorage()

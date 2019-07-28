@@ -31,13 +31,10 @@ class Common extends MY_Controller{
   }
 
   public function delete_data(){
-
-    ?>
-    <!-- <form class="" method="post">
-      <input type="text" name="where[task_id]">
-      <input type="submit" value="submit">
-    </form> -->
-    <?php
+    // <form class="" method="post">
+    //   <input type="text" name="where[task_id]">
+    //   <input type="submit" value="submit">
+    // </form>
     if (empty($_REQUEST['where'])) die();
     if (empty($_REQUEST['table'])) die();
 
@@ -51,18 +48,13 @@ class Common extends MY_Controller{
 
   public function update_data(){
 
-    ?>
-    <form class="" method="post">
-      <input type="text" name="set[title]">
-      <input type="text" name="set[description]">
-      <input type="text" name="where[task_id]">
-      <input type="submit" value="submit">
-    </form>
-    <?php
-    echo "<pre>";
-    print_r($_REQUEST);
-    echo "</pre>";
-    exit();
+
+    // <form class="" method="post">
+    //   <input type="text" name="set[title]">
+    //   <input type="text" name="set[description]">
+    //   <input type="text" name="where[task_id]">
+    //   <input type="submit" value="submit">
+    // </form>
     if (empty($_REQUEST['where'])) die();
     if (empty($_REQUEST['table'])) die();
     if (empty($_REQUEST['set'])) die();
@@ -89,28 +81,27 @@ class Common extends MY_Controller{
   }
 
   public function get_data(){
-    ?>
-    <!-- <form class="" method="post">
-      <input type="text" name="post" value="sss">
-    </form> -->
-    <?php
+    // if (empty($_REQUEST['where'])) die();
+    if (empty($_REQUEST['table'])) die();
 
     $result=$this->MY_Model
     ->select()
-    ->from($_REQUEST['table'])
-    ->where($_REQUEST['where'])
-    ->get()
-    ->result();
+    ->from($_REQUEST['table']);
+    if (empty($_REQUEST['where'])) {
+      $result=$result
+      ->get()
+      ->result();
+    }else{
+      $result=$result
+      ->where($_REQUEST['where'])
+      ->get()
+      ->row();
+    }
 
     echo json_encode($result);
   }
 
   public function is_data_exist(){
-    ?>
-    <!-- <form class="" method="post">
-      <input type="text" name="where[task_id]">
-    </form> -->
-    <?php
 
     $result=$this->MY_Model
     ->select()
@@ -154,16 +145,6 @@ class Common extends MY_Controller{
       // }else{
       //   echo "false";
       // }
-  }
-
-  public function get_data($table="users")
-  {
-    $result=$this->MY_Model
-    ->select()
-    ->from($table)
-    ->get();
-
-    echo ($result->num_rows())?json_encode($result->result()):false;
   }
 
 }
