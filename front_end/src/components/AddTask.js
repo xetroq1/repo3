@@ -49,42 +49,58 @@ class AddTask extends Component {
 
   handleSubmit(event) {
     // alert('A name was submitted: ' + this.state.value);
-    console.log(this.state);
     event.preventDefault();
+
+    console.log(this.state.formData);
+    this.submitTast(this.state.formData)
   }
 
   updateState(e) {
     // console.log(e.target);
-   // this.setState({
-   //   formData:{
-   //     [e.target.name]: e.target.value
-   //   }
-   //  });
-   this.state.formData[e.target.name] = e.target.value;
-  // this.setState({
-  //   formData:{
-  //     [e.target.name]: e.target.value
-  //   }
-  //  });
-      // console.log(this.state);
+    // this.setState({
+    //   formData:{
+    //     [e.target.name]: e.target.value
+    //   }
+    //  });
+    this.state.formData[e.target.name] = e.target.value;
+    // this.setState({
+    //   formData:{
+    //     [e.target.name]: e.target.value
+    //   }
+    //  });
+    // console.log(this.state);
   }
 
-  submitTast = () => {
-    axios
-      .get("http://localhost/orchester/backend_api/common/get_users")
-      .then(result  => {
-        this.setState({ users : result.data });
-        // alert(1);
-        // console.log(usersData);
-        // console.log(result.data);
-        // console.log(this.state.users);
-        // this.setState({users: result.data});
-        // usersData = result.data;
+  submitTast = (param) => {
+    console.log(param);
+    var self            = this;
+    const insert_url    = 'http://localhost/orchester/backend_api/common/add_data/tasks';
+    const bodyFormData  =  new FormData();
+    for(var i  = 0; i  < Object.keys(param).length; i++){
+        bodyFormData.append(Object.keys(param)[i],param[Object.keys(param)[i]]);
+    }
+    bodyFormData.append('assigned_to', `${this.props.match.params.toId}`);
+      console.log(bodyFormData);
+
+    axios({
+          method : 'post',
+          url    :  insert_url,
+          data   : bodyFormData,
+          config : { headers: {'Content-Type': 'multipart/form-data' }}
       })
-      .catch(error => {
-        alert("connection error");
-        // console.log('herrorr');
-        this.setState({ error, isLoading: false })
+      .then(
+          (result) =>
+          {
+            console.log(result);
+              // this.setState({data : result.data.return, response : result.data})
+              // if(result.data.response_status){
+                  // this.setStorage()
+                  // window.location.reload();
+              // }
+          }
+      )
+      .catch(function (result){
+          console.log(result);
       });
   }
 

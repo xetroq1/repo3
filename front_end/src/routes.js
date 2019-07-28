@@ -37,6 +37,8 @@ const Widgets = React.lazy(() => import('./views/Widgets/Widgets'));
 const Users = React.lazy(() => import('./views/Users/Users'));
 const User = React.lazy(() => import('./views/Users/User'));
 const AddTask = React.lazy(() => import('./components/AddTask'));
+const Tasks = React.lazy(() => import('./components/Tasks'));
+// const AddTask = React.lazy(() => import('./components/AddTask'));
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
@@ -81,8 +83,9 @@ const routes = [
   { path: '/widgets', name: 'Widgets', component: Widgets },
   { path: '/charts', name: 'Charts', component: Charts },
   { path: '/users', exact: true,  name: 'Users', component: Users },
-  { path: '/task/add', exact: true,  name: 'AddTask', component: AddTask },
   { path: '/users/:id', exact: true, name: 'User Details', component: User },
+  { path: '/tasks', exact: true,  name: 'Tasks', component: Tasks },
+  { path: '/task/add/:toId', exact: true,  name: 'AddTask', component: AddTask },
 
   // Our changes
   // { path: '/user/user', name: 'Users', component: User },
