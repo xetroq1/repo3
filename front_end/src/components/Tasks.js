@@ -22,15 +22,18 @@ function UserRow(props) {
     <tr key={task.task_id.toString()}>
       <th scope="row">{task.title}</th>
       <td>{task.description}</td>
-      {// <td>{user.registered}</td>
+      {
+        // <td>{user.registered}</td>
       }
       <td><Link to={userLink}>View User :{task.assigned_to}</Link></td>
-      {// <td><Link to={userLink}><Badge color={getBadge(user.status)}>{user.status}</Badge></Link></td>
+      {
+        // <td><Link to={userLink}><Badge color={getBadge(user.status)}>{user.status}</Badge></Link></td>
       }
       <td>
         Actions
-        {// <Link to={addTask}>Add Task</Link>
-      }
+        {
+          // <Link to={addTask}>Add Task</Link>
+        }
       </td>
     </tr>
   )
