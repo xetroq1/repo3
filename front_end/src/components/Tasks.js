@@ -47,8 +47,9 @@ class Tasks extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost/orchester/backend_api/common/get_data/tasks")
+      .get("http://localhost/orchester/backend_api/common/get_data?table=tasks")
       .then(result  => {
+        console.log(result);
         this.setState({ tasks : result.data });
         // alert(1);
         // console.log(result);
@@ -87,7 +88,7 @@ class Tasks extends Component {
               </CardHeader>
               <CardBody>
                 <h1>
-                sadasdsa
+                All Tasks
                 </h1>
                 <Table responsive hover>
                   <thead>
